@@ -1,23 +1,28 @@
-import React from 'react'
-import { useRef, useState } from 'react';
-// @ts-ignore
-import html2pdf from 'html2pdf.js';
+import React, { useEffect, useState } from 'react'
+export interface NavBarProps {
+    clickEvent: () => void;
+}
 
-const NavBar = () => {
+const NavBar: React.FC<NavBarProps> = ({ clickEvent }) => {
 
-    const contentRef = useRef();
+    const [colorCode, setColorCode] = useState("");
+    const [headerColorCode, setHeaderColorCode] = useState("");
+    const [bgColorCode, setBgColorCode] = useState("");
 
-    const saveTemplate = () => {
-        console.log('saving..');
-        const opt = {
-            margin: 0,
-            filename: 'resume.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 4 },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        };
-        html2pdf().set(opt).from(contentRef.current).save();
-    };
+    useEffect(() => {
+        const textCode = localStorage.getItem("colorCode");
+        const header = localStorage.getItem("headerColorCode");
+        const bg = localStorage.getItem("bgColorCode");
+        if (textCode && textCode !== " ") setColorCode(textCode);
+        if (header && header !== " ") setHeaderColorCode(header);
+        if (bg && bg !== " ") setBgColorCode(bg);
+    }, []);
+
+    useEffect(() => {
+        if (colorCode !== "") localStorage.setItem("colorCode", colorCode);
+        if (headerColorCode !== "") localStorage.setItem("headerColorCode", headerColorCode);
+        if (bgColorCode !== "") localStorage.setItem("bgColorCode", bgColorCode);
+    }, [colorCode, headerColorCode, bgColorCode]);
 
     return (
         <>
@@ -26,13 +31,35 @@ const NavBar = () => {
                     MagicalResume
                 </p>
                 <div className="w-[200px] shrink-0 md:w-0"></div>
-                <div className="py-1 pr-1 pl-5 rounded-full bg-secondary flex items-center gap-5 shadow-lg">
-                    <p className='cursor-pointer'>Font</p>
-                    <p>Theme</p>
+                <div className="py-1 pr-1 pl-5 rounded-full bg-secondary flex items-center gap-5 shadow-lg h-14">
+                    <details className="dropdown cursor-pointer">
+                        <summary className="m-1 btn">Font</summary>
+                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            <li><a>Font 1</a></li>
+                            <li><a>Font 2</a></li>
+                        </ul>
+                    </details>
+                    <details className="dropdown cursor-pointer">
+                        <summary className="m-1 btn">Colors</summary>
+                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            <li>
+                                <label htmlFor="">Color For Background</label><br />
+                                <input type="color" className='form-control w-full' name='bgColorCode' onChange={(e) => setBgColorCode(e.target.value)} />
+                            </li>
+                            <li>
+                                <label htmlFor="">Color For Header</label><br />
+                                <input type="color" className='form-control w-full' name='headerColorCode' onChange={(e) => setHeaderColorCode(e.target.value)} />
+                            </li>
+                            <li>
+                                <label htmlFor="">Color For Text</label><br />
+                                <input type="color" className='form-control w-full' name='colorCode' onChange={(e) => setColorCode(e.target.value)} />
+                            </li>
+                        </ul>
+                    </details>
                     <p>Layout</p>
                     <p>Format</p>
                     <button
-                        onClick={saveTemplate}
+                        onClick={clickEvent}
                         className="h-full px-5 bg-[#2bd3bd] rounded-full">
                         Download
                     </button>

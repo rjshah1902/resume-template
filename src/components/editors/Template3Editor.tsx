@@ -125,7 +125,7 @@ function Template3Editor({ }: Props) {
   return (
     <div className="flex flex-col h-screen relative">
       {/* Navbar for Editor */}
-      <NavBar />
+      <NavBar clickEvent={saveTemplate} />
 
       <div className="fixed top-[15%] flex gap-3 pl-5 pb-10 z-[800]">
         <div className="flex flex-col gap-7">

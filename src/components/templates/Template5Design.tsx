@@ -1,6 +1,6 @@
 'use client';
 
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { Template5DataType } from '../editors/Template5Editor';
 import Img from '../Img';
 import EditorText from '../shared/EditorText';
@@ -79,8 +79,34 @@ function Template5Design(
     handleExperienceChange(experience);
   }
 
+  const [colorCode, setColorCode] = useState("white");
+  const [headerColorCode, setHeaderColorCode] = useState("white");
+  const [bgColorCode, setBgColorCode] = useState("white");
+
+  useEffect(() => {
+    getStorageData();
+  }, []);
+
+  const getStorageData = () => {
+    const textCode = localStorage.getItem("colorCode");
+    const header = localStorage.getItem("headerColorCode");
+    const bg = localStorage.getItem("bgColorCode");
+
+    if (textCode && textCode !== " ") setColorCode(textCode);
+    if (header && header !== " ") setHeaderColorCode(header);
+    if (bg && bg !== " ") setBgColorCode(bg);
+  }
+
+  useEffect(() => {
+    if (colorCode !== "white") localStorage.setItem("colorCode", colorCode);
+    if (headerColorCode !== "white") localStorage.setItem("headerColorCode", headerColorCode);
+    if (bgColorCode !== "white") localStorage.setItem("bgColorCode", bgColorCode);
+  }, [colorCode, headerColorCode, bgColorCode]);
+
   return (
-    <main className="w-full max-w-[800px] h-max flex flex-col bg-white text-black relative cv-5">
+    <main
+      className="w-full max-w-[800px] h-max flex flex-col relative cv-5"
+      style={{ backgroundColor: bgColorCode, color: colorCode }} >
       {isPremium && (
         <Img
           src="https://cdn-icons-png.flaticon.com/512/1478/1478930.png"
@@ -90,7 +116,7 @@ function Template5Design(
       )}
 
       {/* INFO */}
-      <section className="flex justify-between gap-5 bg-[#34678C] px-5 py-7 pb-6">
+      <section className={`flex justify-between gap-5  px-5 py-7 pb-6`} style={{ backgroundColor: headerColorCode }}>
         {/* USER INFO */}
         <div>
           <h1 className="text-4xl text-white">

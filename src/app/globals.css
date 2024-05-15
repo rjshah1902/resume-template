@@ -48,3 +48,20 @@ body {
 .cv-5{
   min-height: 100vh;
 }
+
+.dropdown .dropdown-content{
+  position: absolute;
+  top: 60px;
+  background: white;
+  width: 250px;
+  color: black;
+}
+
+.dropdown .dropdown-content li{
+  padding: 15px 15px;
+  display: block;
+}
+
+.dropdown .dropdown-content li:hover{
+  color: skyblue;
+}
