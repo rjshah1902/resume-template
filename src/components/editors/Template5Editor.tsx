@@ -140,20 +140,20 @@ function Template5Editor({ }: Props) {
                     <button
                         onClick={() => setOpenMyContent(!openMyContent)}
                         className={`bg-secondary rounded-tl-xl rounded-tr-xl py-5 px-2 ${openMyContent
-                            ? 'w-[70px] h-[70px] text-[12px] text-green-400'
+                            ? 'w-[70px] h-[70px] text-[12px] line-height-40 text-green-400'
                             : 'w-[80px] h-[100px] text-sm'
                             }`}>
                         My Content
                     </button>
                     <Link href="/resume-templates/3" className={`bg-secondary py-5 px-2  ${openMyContent
-                        ? 'w-[70px] h-[70px] text-[12px]'
+                        ? 'w-[70px] h-[70px] text-[12px] line-height-40'
                         : 'w-[80px] h-[100px] text-sm'
                         }`}>
                         Switch Template
                     </Link>
                     <button
                         className={`bg-secondary rounded-bl-xl rounded-br-xl py-5 px-2 ${openMyContent
-                            ? 'w-[70px] h-[70px] text-[12px]'
+                            ? 'w-[70px] h-[70px] text-[12px] line-height-40'
                             : 'w-[80px] h-[100px] text-sm'
                             }`}>
                         AI Assistant
