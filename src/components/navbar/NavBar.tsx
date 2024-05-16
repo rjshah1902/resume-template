@@ -8,21 +8,26 @@ const NavBar: React.FC<NavBarProps> = ({ clickEvent }) => {
     const [colorCode, setColorCode] = useState("");
     const [headerColorCode, setHeaderColorCode] = useState("");
     const [bgColorCode, setBgColorCode] = useState("");
+    const [fontName, setFontName] = useState("");
 
     useEffect(() => {
         const textCode = localStorage.getItem("colorCode");
         const header = localStorage.getItem("headerColorCode");
         const bg = localStorage.getItem("bgColorCode");
+        const font = localStorage.getItem("fontName");
         if (textCode && textCode !== " ") setColorCode(textCode);
         if (header && header !== " ") setHeaderColorCode(header);
         if (bg && bg !== " ") setBgColorCode(bg);
+        if (font && font != "") setFontName(font);
     }, []);
 
     useEffect(() => {
         if (colorCode !== "") localStorage.setItem("colorCode", colorCode);
         if (headerColorCode !== "") localStorage.setItem("headerColorCode", headerColorCode);
         if (bgColorCode !== "") localStorage.setItem("bgColorCode", bgColorCode);
-    }, [colorCode, headerColorCode, bgColorCode]);
+        if (fontName != "") localStorage.setItem("fontName", fontName);
+    }, [colorCode, headerColorCode, bgColorCode, fontName]);
+
 
     return (
         <>
@@ -35,8 +40,9 @@ const NavBar: React.FC<NavBarProps> = ({ clickEvent }) => {
                     <details className="dropdown cursor-pointer">
                         <summary className="m-1 btn">Font</summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                            <li><a>Font 1</a></li>
-                            <li><a>Font 2</a></li>
+                            <li><a onClick={(e) => setFontName(`raleway`)}>Raleway</a></li>
+                            <li><a onClick={(e) => setFontName(`jacquard-12-regular`)}>Jacquard</a></li>
+                            <li><a onClick={(e) => setFontName(`poppins-regular`)}>Poppins</a></li>
                         </ul>
                     </details>
                     <details className="dropdown cursor-pointer">

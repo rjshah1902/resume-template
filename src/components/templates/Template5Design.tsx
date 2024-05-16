@@ -82,6 +82,7 @@ function Template5Design(
   const [colorCode, setColorCode] = useState("white");
   const [headerColorCode, setHeaderColorCode] = useState("white");
   const [bgColorCode, setBgColorCode] = useState("white");
+  const [fontName, setFontName] = useState("");
 
   useEffect(() => {
     getStorageData();
@@ -91,21 +92,25 @@ function Template5Design(
     const textCode = localStorage.getItem("colorCode");
     const header = localStorage.getItem("headerColorCode");
     const bg = localStorage.getItem("bgColorCode");
+    const font = localStorage.getItem("fontName");
 
     if (textCode && textCode !== " ") setColorCode(textCode);
     if (header && header !== " ") setHeaderColorCode(header);
     if (bg && bg !== " ") setBgColorCode(bg);
+    if (font && font !== " ") setFontName(font);
   }
 
   useEffect(() => {
     if (colorCode !== "white") localStorage.setItem("colorCode", colorCode);
     if (headerColorCode !== "white") localStorage.setItem("headerColorCode", headerColorCode);
     if (bgColorCode !== "white") localStorage.setItem("bgColorCode", bgColorCode);
-  }, [colorCode, headerColorCode, bgColorCode]);
+    if (fontName !== "") localStorage.setItem("fontName", fontName);
+  }, [colorCode, headerColorCode, bgColorCode, fontName]);
+
 
   return (
     <main
-      className="w-full max-w-[800px] h-max flex flex-col relative cv-5"
+      className={`w-full max-w-[800px] h-max flex flex-col relative cv-5 ${fontName}`}
       style={{ backgroundColor: bgColorCode, color: colorCode }} >
       {isPremium && (
         <Img

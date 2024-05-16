@@ -6,6 +6,7 @@ import EditorInput from '../shared/EditorInput';
 // @ts-ignore
 import html2pdf from 'html2pdf.js';
 import NavBar from '../navbar/NavBar';
+import Link from 'next/link';
 
 type Props = {};
 
@@ -144,13 +145,12 @@ function Template5Editor({ }: Props) {
                             }`}>
                         My Content
                     </button>
-                    <button
-                        className={`bg-secondary py-5 px-2 ${openMyContent
-                            ? 'w-[70px] h-[70px] text-[12px]'
-                            : 'w-[80px] h-[100px] text-sm'
-                            }`}>
+                    <Link href="/resume-templates/3" className={`bg-secondary py-5 px-2  ${openMyContent
+                        ? 'w-[70px] h-[70px] text-[12px]'
+                        : 'w-[80px] h-[100px] text-sm'
+                        }`}>
                         Switch Template
-                    </button>
+                    </Link>
                     <button
                         className={`bg-secondary rounded-bl-xl rounded-br-xl py-5 px-2 ${openMyContent
                             ? 'w-[70px] h-[70px] text-[12px]'
