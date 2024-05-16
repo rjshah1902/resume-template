@@ -88,6 +88,7 @@ function Template5Design(
     getStorageData();
   }, []);
 
+
   const getStorageData = () => {
     const textCode = localStorage.getItem("colorCode");
     const header = localStorage.getItem("headerColorCode");
